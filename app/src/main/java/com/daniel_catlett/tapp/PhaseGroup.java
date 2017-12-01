@@ -14,41 +14,32 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by daniel on 11/28/2017.
+ * Created by daniel on 11/30/2017.
  */
 
-public class Tournament
+public class PhaseGroup
 {
-    private String tournamentURL;
+    private String phaseGroupURL;
+    private int phaseGroupID;
+    private String phaseGroupName;
+    private ArrayList<Integer> setIDs = new ArrayList<Integer>();
 
-    String tournamentName;
-    int tournamentID;
-    String eventName;
-    ArrayList<Integer> eventIDs = new ArrayList<Integer>();
-
-    public Tournament(String inputName)
+    public PhaseGroup(int ID)
     {
-        createTournamentUrl(inputName);
-        new RetrieveFeedTask(tournamentURL).execute();
+        phaseGroupID = ID;
+        createURL();
     }
 
-    private void createTournamentUrl(String inputName)
+    private void createURL()
     {
-        tournamentURL = "https://api.smash.gg/tournament/";
-        inputName = inputName.toLowerCase();
-        inputName = inputName.replaceAll(" ", "-");
-        tournamentURL = tournamentURL.concat(inputName);
-        tournamentURL = tournamentURL.concat("?expand[0]=event");
+        phaseGroupURL = "https://api.smash.gg/phase_group/";
+        phaseGroupURL = phaseGroupURL.concat(Integer.toString(phaseGroupID));
+        phaseGroupURL = phaseGroupURL.concat("?expand[0]=sets");
     }
 
-    public String getTournamentName()
+    public String getPhaseGroupName()
     {
-        return tournamentName;
-    }
-
-    public int getTournamentID()
-    {
-        return tournamentID;
+        return phaseGroupName;
     }
 
     class RetrieveFeedTask extends AsyncTask<Void, Void, String>
@@ -108,22 +99,19 @@ public class Tournament
                 response = "THERE WAS AN ERROR";
             try
             {
-                JSONObject tourney = new JSONObject(response); //Object obtained
+                JSONObject phaseGroupies = new JSONObject(response); //Object obtained
 
-                //save name
-                JSONObject entities = tourney.getJSONObject("entities");
-                JSONObject tournament = entities.getJSONObject("tournament");
-                tournamentName = tournament.getString("name");
+                //save name of phaseGroup
+                JSONObject entities = phaseGroupies.getJSONObject("entities");
+                JSONObject groups = entities.getJSONObject("groups");
+                phaseGroupName = groups.getString("displayIdentifier");
 
-                //save tournament id
-                tournamentID = Integer.parseInt(tournament.getString("id"));
-
-                //save event ids
-                JSONArray events = entities.getJSONArray("event");
-                for (int i = 0; i < events.length(); i++)
+                //save set ids
+                JSONArray sets = entities.getJSONArray("sets");
+                for (int i = 0; i < sets.length(); i++)
                 {
-                    JSONObject event = events.getJSONObject(i);
-                    eventIDs.add(event.getInt("id"));
+                    JSONObject phase = sets.getJSONObject(i);
+                    setIDs.add(phase.getInt("id"));
                 }
             }
             catch (JSONException e)

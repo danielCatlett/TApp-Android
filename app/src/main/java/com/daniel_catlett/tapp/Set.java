@@ -11,44 +11,83 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 /**
- * Created by daniel on 11/28/2017.
+ * Created by daniel on 12/1/2017.
  */
 
-public class Tournament
+public class Set
 {
-    private String tournamentURL;
+    private String setURL;
+    private int setID;
+    private String roundText;
 
-    String tournamentName;
-    int tournamentID;
-    String eventName;
-    ArrayList<Integer> eventIDs = new ArrayList<Integer>();
+    private int entrant1ID;
+    private String entrant1Tag;
+    private int entrant1Score;
 
-    public Tournament(String inputName)
+    private int entrant2ID;
+    private String entrant2Tag;
+    private int entrant2Score;
+
+    private int winnerID;
+    private int loserID;
+
+    public Set(int ID)
     {
-        createTournamentUrl(inputName);
-        new RetrieveFeedTask(tournamentURL).execute();
+        setID = ID;
+        createSetURL();
     }
 
-    private void createTournamentUrl(String inputName)
+    private void createSetURL()
     {
-        tournamentURL = "https://api.smash.gg/tournament/";
-        inputName = inputName.toLowerCase();
-        inputName = inputName.replaceAll(" ", "-");
-        tournamentURL = tournamentURL.concat(inputName);
-        tournamentURL = tournamentURL.concat("?expand[0]=event");
+        setURL = "https://api.smash.gg/set/";
+        setURL = setURL.concat(Integer.toString(setID));
     }
 
-    public String getTournamentName()
+    public String getRoundText()
     {
-        return tournamentName;
+        return roundText;
     }
 
-    public int getTournamentID()
+    public int getEntrant1ID()
     {
-        return tournamentID;
+        return entrant1ID;
+    }
+
+    public String getEntrant1Tag()
+    {
+        return entrant1Tag;
+    }
+
+    public int getEntrant1Score()
+    {
+        return entrant1Score;
+    }
+
+    public int getEntrant2ID()
+    {
+        return entrant2ID;
+    }
+
+    public String getEntrant2Tag()
+    {
+        return entrant2Tag;
+    }
+
+    public int getEntrant2Score()
+    {
+        return entrant2Score;
+    }
+
+    public int getWinnerID()
+    {
+        return winnerID;
+    }
+
+    public int getLoserID()
+    {
+        return loserID;
     }
 
     class RetrieveFeedTask extends AsyncTask<Void, Void, String>
@@ -108,23 +147,24 @@ public class Tournament
                 response = "THERE WAS AN ERROR";
             try
             {
-                JSONObject tourney = new JSONObject(response); //Object obtained
+                JSONObject sety = new JSONObject(response); //Object obtained
 
-                //save name
-                JSONObject entities = tourney.getJSONObject("entities");
-                JSONObject tournament = entities.getJSONObject("tournament");
-                tournamentName = tournament.getString("name");
+                //save round text
+                JSONObject entities = sety.getJSONObject("entities");
+                JSONObject sets = entities.getJSONObject("sets");
+                roundText = sets.getString("fullRoundText");
 
-                //save tournament id
-                tournamentID = Integer.parseInt(tournament.getString("id"));
+                //save entrant 1 data
+                entrant1ID = sets.getInt("entrant1ID");
+                entrant1Score = sets.getInt("entrant1Score");
 
-                //save event ids
-                JSONArray events = entities.getJSONArray("event");
-                for (int i = 0; i < events.length(); i++)
-                {
-                    JSONObject event = events.getJSONObject(i);
-                    eventIDs.add(event.getInt("id"));
-                }
+                //save entrant 2 data
+                entrant2ID = sets.getInt("entrant2ID");
+                entrant2Score = sets.getInt("entrant2Score");
+
+                //winners and losers
+                winnerID = sets.getInt("winnerID");
+                loserID = sets.getInt("loserID");
             }
             catch (JSONException e)
             {
