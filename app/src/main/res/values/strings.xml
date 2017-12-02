@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">TApp</string>
+    <string name="home">Home</string>
+    <string name="txtTournaments">My Tournaments</string>
+    <string name="txtAdd">Add Tournament</string>
+    <string name="txtFollowed">Followed Players</string>
+    <string name="txtSettings">Settings and Extras</string>
+    <string name="txtCredits">Credits</string>
+    <string name="txtContact">Contact Us</string>
+    <string name="txtSearch">Search...</string>
+    <string name="txtSchedule">Schedule</string>
+    <string name="txtEvents">Events</string>
+    <string name="txtAttendees">Attendees</string>
+    <string name="txtNotify">Notify me every time...</string>
+    <string name="txtWin">They Win</string>
+    <string name="txtLose">They Lose</string>
+    <string name="txtPlaying">They\'re Playing</string>
+    <string name="txtBracket">Bracket</string>
+    <string name="descriptionHeart">Heart Icon</string>
+    <string name="descriptionBracket">Bracket Icon</string>
+    <string name="descriptionSmash">Smash Ball Icon</string>
+    <string name="descriptionSettings">Settings Icon</string>
+    <string name="descriptionPlus">Plus Icon</string>
 </resources>

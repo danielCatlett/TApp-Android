@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
+
     <style name="SimonTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/simonRed</item>
@@ -9,6 +10,8 @@
         <item name="android:textColorPrimary">@color/simonBlack</item>
         <item name="android:textColorPrimaryInverse">@color/simonBlack</item>
         <item name="android:textColorSecondaryInverse">@color/simonBlack</item>
+        <item name="android:navigationBarColor">@color/simonBlack</item>
+        <item name="android:statusBarColor">@color/darkRed</item>
         <item name="android:textColorSecondary">@color/simonBlack</item>
     </style>
 </resources>

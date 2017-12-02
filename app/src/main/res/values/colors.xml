@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="background_material_light">#333333</color>
+    <color name="simonGrey">#333333</color>
+    <color name="simonRed">#c8353f</color>
+    <color name="simonBlack">#1a1a1a</color>
+    <color name="darkRed">#8f262d</color>
 </resources>
