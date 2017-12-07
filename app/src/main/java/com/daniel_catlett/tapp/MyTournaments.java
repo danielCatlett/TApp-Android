@@ -2,6 +2,7 @@ package com.daniel_catlett.tapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ public class MyTournaments extends AppCompatActivity
     TextView title;
     ListView myTournamentsList;
     ArrayList<String> tournamentNames = new ArrayList<String>();
+    SharedPreferences settings;
+    public static final String MyPREFERENCES = "MyPrefs";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,10 +34,18 @@ public class MyTournaments extends AppCompatActivity
         title.setTypeface(kelson);
         myTournamentsList = (ListView)findViewById(R.id.myTournamentsList);
 
-        tournamentNames.add("The Big House 7");
-        tournamentNames.add("The Big House 6");
-        tournamentNames.add("Genesis 5");
-        tournamentNames.add("RLCS Season 2");
+        settings = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        int numTournaments = settings.getInt("numTournaments", -1);
+        if(numTournaments != -1)
+        {
+            for(int i = 1; i <= numTournaments; i++)
+            {
+                //construct key for tournament name
+                String key = "tournament";
+                key = key.concat(Integer.toString(i));
+                tournamentNames.add(settings.getString(key, ""));
+            }
+        }
 
         BasicAdapter adapter = new BasicAdapter(this, tournamentNames);
         myTournamentsList.setAdapter(adapter);
@@ -46,6 +58,7 @@ public class MyTournaments extends AppCompatActivity
             {
                 Intent intent = new Intent(context, TournamentPage.class);
                 intent.putExtra("title", tournamentNames.get(position));
+                intent.putExtra("tournamentPosition", position);
                 startActivity(intent);
             }
         });

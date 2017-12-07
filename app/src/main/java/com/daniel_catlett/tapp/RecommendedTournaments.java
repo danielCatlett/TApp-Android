@@ -21,8 +21,9 @@ public class RecommendedTournaments extends AppCompatActivity
     TextView title;
     ArrayList<String> tournamentNames = new ArrayList<String>();
     ArrayList<String> tournamentSlugs = new ArrayList<String>();
+    ArrayList<String> tournamentsAlreadySaved = new ArrayList<String>();
 
-    SharedPreferences sharedPreferences;
+    SharedPreferences settings;
     public static final String MyPREFERENCES = "MyPrefs";
 
     @Override
@@ -40,7 +41,16 @@ public class RecommendedTournaments extends AppCompatActivity
         addTournamentNames();
         addTournamentSlugs();
 
-        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        settings = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        //set up for preventing user from adding a tournament multiple times
+        int numTournaments = settings.getInt("numTournaments", -1);
+        for(int i = 1; i <= numTournaments; i++)
+        {
+            String key = "tournament";
+            key = key.concat(Integer.toString(i));
+            tournamentsAlreadySaved.add(settings.getString(key, ""));
+        }
 
         BasicAdapter adapter = new BasicAdapter(this, tournamentNames);
         recList.setAdapter(adapter);
@@ -50,29 +60,77 @@ public class RecommendedTournaments extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id)
             {
-                AlertDialog.Builder builder = new AlertDialog.Builder(RecommendedTournaments.this);
-                builder.setTitle("Add Tournament");
-                builder.setMessage("Do you want to add this tournament to your saved tournaments?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                //check to see if the tournament name is in the tournamentsAlreadySaved
+                boolean notRepeat = true;
+                for(int i = 0; i < tournamentsAlreadySaved.size(); i++)
                 {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
+                    if(tournamentsAlreadySaved.get(i).equals(tournamentNames.get(position)))
                     {
+                        notRepeat = false;
+                        break;
+                    }
+                }
 
-                        Toast.makeText(RecommendedTournaments.this, tournamentNames.get(position) + " added to your saved tournaments.", Toast.LENGTH_LONG).show();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener()
+                if(notRepeat)
                 {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RecommendedTournaments.this);
+                    builder.setTitle("Add Tournament");
+                    builder.setMessage("Do you want to add this tournament to your saved tournaments?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
                     {
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            updatePreferences(position);
+                            Toast.makeText(RecommendedTournaments.this, tournamentNames.get(position) + " has been added to your saved tournaments.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
+                }
+                else
+                    Toast.makeText(RecommendedTournaments.this, tournamentNames.get(position) + " is already in your saved tournaments!", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void updatePreferences(int position)
+    {
+        SharedPreferences.Editor editor = settings.edit();
+        //editor.clear();
+
+        //keep track of the number of tournaments saved, so that we know how many to pull later
+        int currentNum = settings.getInt("numTournaments", -1);
+        //if the value already exists
+        if(currentNum > 0)
+        {
+            currentNum++;
+            editor.putInt("numTournaments", currentNum);
+        }
+        else
+        {
+            currentNum = 1;
+            editor.putInt("numTournaments", 1);
+        }
+
+        //add the name of the tournament chosen to the preferences
+        //start by constructing the key using currentNum
+        String key = "tournament";
+        key = key.concat(Integer.toString(currentNum));
+        editor.putString(key, tournamentNames.get(position));
+
+        //add the slug of the tournament chosen
+        key = key.concat("slug");
+        editor.putString(key, tournamentSlugs.get(position));
+
+        editor.apply();
     }
 
     private void addTournamentNames()
