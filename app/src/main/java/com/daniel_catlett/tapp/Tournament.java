@@ -51,6 +51,16 @@ public class Tournament
         return tournamentID;
     }
 
+    public int getNumEvents()
+    {
+        return eventIDs.size();
+    }
+
+    public int getEventID(int index)
+    {
+        return eventIDs.get(index);
+    }
+
     class RetrieveFeedTask extends AsyncTask<Void, Void, String>
     {
 

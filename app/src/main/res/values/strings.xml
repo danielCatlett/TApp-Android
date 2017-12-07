@@ -2,7 +2,7 @@
     <string name="app_name">TApp</string>
     <string name="home">Home</string>
     <string name="txtTournaments">My Tournaments</string>
-    <string name="txtAdd">Add Tournament</string>
+    <string name="txtAdd">Add Tournaments</string>
     <string name="txtFollowed">Followed Players</string>
     <string name="txtSettings">Settings and Extras</string>
     <string name="txtCredits">Credits</string>
@@ -21,4 +21,10 @@
     <string name="descriptionSmash">Smash Ball Icon</string>
     <string name="descriptionSettings">Settings Icon</string>
     <string name="descriptionPlus">Plus Icon</string>
+    <string name="txtTwitch">Twitch.TV Stream</string>
+    <string name="txtDownload">Download Tourney Info</string>
+    <string name="descriptionTourneyLogo">Tournament Logo</string>
+    <string name="descriptionMagnifying">Icon</string>
+    <string name="txtRec">Recommended Tournaments</string>
+    <string name="txtAddA">Add a Tournament</string>
 </resources>

@@ -23,12 +23,16 @@
         <activity android:name=".FollowedPlayers" />
         <activity android:name=".Settings" />
         <activity android:name=".TournamentPage" />
-        <activity android:name=".Attendees" />
+        <activity android:name=".AttendeesEventsPage" />
         <activity android:name=".EventAttendees" />
         <activity android:name=".FollowedSettings" />
         <activity android:name=".Schedule" />
         <activity android:name=".Events" />
-        <activity android:name=".Phases"></activity>
+        <activity android:name=".Phases" />
+        <activity android:name=".PhaseGroups" />
+        <activity android:name=".Bracket" />
+        <activity android:name=".RecommendedTournaments" />
+        <activity android:name=".InputTournament"></activity>
     </application>
 
 </manifest>

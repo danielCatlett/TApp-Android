@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.daniel_catlett.tapp.MainActivity">
+    tools:context="com.daniel_catlett.tapp.MainActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarHome"
-        android:layout_width="0dp"
+        android:layout_width="384dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        android:textAlignment="center"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        android:theme="?attr/actionBarTheme">
 
         <TextView
             android:id="@+id/textViewHome"
@@ -25,9 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/home"
-            android:textSize="24sp"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="19dp" />
+            android:textSize="24sp" />
     </android.support.v7.widget.Toolbar>
 
     <ImageView
@@ -36,12 +31,114 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="135dp"
         android:contentDescription="@string/descriptionSmash"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarHome"
-        app:srcCompat="@drawable/ICON_SmashBall" />
+        app:srcCompat="@drawable/icon_smashball" />
+
+    <Button
+        android:id="@+id/myTournamentsButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="125dp"
+        android:background="@color/simonRed"
+        android:drawableRight="@drawable/smallicon_bracket"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:padding="10dp"
+        android:text="@string/txtTournaments"
+        android:textAllCaps="false"
+        android:textColor="@color/simonBlack"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarHome" />
+
+    <Button
+        android:id="@+id/addTournamentButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/simonRed"
+        android:drawableRight="@drawable/smallicon_plus"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:padding="10dp"
+        android:text="@string/txtAdd"
+        android:textAllCaps="false"
+        android:textColor="@color/simonBlack"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myTournamentsButton" />
+
+    <Button
+        android:id="@+id/followedButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/simonRed"
+        android:drawableRight="@drawable/smallicon_heart"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:padding="10dp"
+        android:text="@string/txtFollowed"
+        android:textAllCaps="false"
+        android:textColor="@color/simonBlack"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTournamentButton" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/simonRed"
+        android:drawableRight="@drawable/smallicon_settings"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:padding="10dp"
+        android:text="@string/txtSettings"
+        android:textAllCaps="false"
+        android:textColor="@color/simonBlack"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/followedButton" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/descriptionSmash"
+        app:layout_constraintBottom_toTopOf="@+id/myTournamentsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarHome"
+        app:srcCompat="@drawable/mediumicon_smashball" />
 
 </android.support.constraint.ConstraintLayout>
