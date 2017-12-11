@@ -19,8 +19,10 @@ public class MyTournaments extends AppCompatActivity
     TextView title;
     ListView myTournamentsList;
     ArrayList<String> tournamentNames = new ArrayList<String>();
+    ArrayList<String> tournamentSlugs = new ArrayList<String>();
     SharedPreferences settings;
     public static final String MyPREFERENCES = "MyPrefs";
+    TextView msg;
 
 
     @Override
@@ -34,6 +36,8 @@ public class MyTournaments extends AppCompatActivity
         title.setTypeface(kelson);
         myTournamentsList = (ListView)findViewById(R.id.myTournamentsList);
 
+        msg = (TextView)findViewById(R.id.textMsg);
+
         settings = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         int numTournaments = settings.getInt("numTournaments", -1);
         if(numTournaments != -1)
@@ -44,8 +48,14 @@ public class MyTournaments extends AppCompatActivity
                 String key = "tournament";
                 key = key.concat(Integer.toString(i));
                 tournamentNames.add(settings.getString(key, ""));
+                //construct key for tournament slug
+                key = key.concat("slug");
+                tournamentSlugs.add(settings.getString(key, ""));
             }
         }
+
+        if(tournamentNames.size() == 0)
+            msg.setVisibility(View.VISIBLE);
 
         BasicAdapter adapter = new BasicAdapter(this, tournamentNames);
         myTournamentsList.setAdapter(adapter);
@@ -58,6 +68,7 @@ public class MyTournaments extends AppCompatActivity
             {
                 Intent intent = new Intent(context, TournamentPage.class);
                 intent.putExtra("title", tournamentNames.get(position));
+                intent.putExtra("slug", tournamentSlugs.get(position));
                 intent.putExtra("tournamentPosition", position);
                 startActivity(intent);
             }

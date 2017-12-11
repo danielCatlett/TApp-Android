@@ -22,7 +22,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/home"
-            android:textSize="24sp" />
+            android:textColor="@color/simonBlack"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="12dp" />
     </android.support.v7.widget.Toolbar>
 
     <ImageView
@@ -36,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarHome"
-        app:srcCompat="@drawable/icon_smashball" />
+        app:srcCompat="@drawable/icon_home" />
 
     <Button
         android:id="@+id/myTournamentsButton"
@@ -139,6 +142,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarHome"
-        app:srcCompat="@drawable/mediumicon_smashball" />
+        app:srcCompat="@drawable/mediumicon_home" />
 
 </android.support.constraint.ConstraintLayout>

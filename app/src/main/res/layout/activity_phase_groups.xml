@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text=""
+            android:textColor="@color/simonBlack"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="174dp"
             tools:layout_editor_absoluteY="19dp" />

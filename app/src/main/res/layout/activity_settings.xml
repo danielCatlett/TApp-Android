@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/txtSettings"
+            android:textColor="@color/simonBlack"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="174dp"
             tools:layout_editor_absoluteY="19dp" />
@@ -56,4 +57,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarSettings"
         app:srcCompat="@drawable/mediumicon_settings" />
+
+    <Button
+        android:id="@+id/aboutButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="125dp"
+        android:background="@color/simonRed"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:padding="10dp"
+        android:text="@string/txtAbout"
+        android:textAllCaps="false"
+        android:textColor="@color/simonBlack"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSettings" />
+
+    <Button
+        android:id="@+id/creditsButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/simonRed"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:padding="10dp"
+        android:text="@string/txtCredits"
+        android:textAllCaps="false"
+        android:textColor="@color/simonBlack"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutButton" />
+
+    <Button
+        android:id="@+id/contactButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/simonRed"
+        android:elevation="4dp"
+        android:gravity="left|center_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:padding="10dp"
+        android:text="@string/txtContact"
+        android:textAllCaps="false"
+        android:textColor="@color/simonBlack"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creditsButton" />
+
+
+
 </android.support.constraint.ConstraintLayout>

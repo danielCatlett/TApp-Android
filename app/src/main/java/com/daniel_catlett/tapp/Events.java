@@ -39,16 +39,14 @@ public class Events extends AppCompatActivity
         title.setTypeface(kelson);
         eventsList = (ListView)findViewById(R.id.eventsList);
 
-        String tournamentName = this.getIntent().getExtras().getString("tournamentTitle");
-        new RetrieveFeedTask(createTournamentUrl(tournamentName), this).execute();
+        String tournamentSlug = this.getIntent().getExtras().getString("tournamentSlug");
+        new RetrieveFeedTask(createTournamentUrl(tournamentSlug), this).execute();
     }
 
-    private String createTournamentUrl(String inputName)
+    private String createTournamentUrl(String slug)
     {
         String tournamentURL = "https://api.smash.gg/tournament/";
-        inputName = inputName.toLowerCase();
-        inputName = inputName.replaceAll(" ", "-");
-        tournamentURL = tournamentURL.concat(inputName);
+        tournamentURL = tournamentURL.concat(slug);
         tournamentURL = tournamentURL.concat("?expand[0]=event");
         return tournamentURL;
     }

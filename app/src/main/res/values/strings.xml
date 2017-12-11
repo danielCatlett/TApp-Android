@@ -6,7 +6,6 @@
     <string name="txtFollowed">Followed Players</string>
     <string name="txtSettings">Settings and Extras</string>
     <string name="txtCredits">Credits</string>
-    <string name="txtContact">Contact Us</string>
     <string name="txtSearch">Search...</string>
     <string name="txtSchedule">Schedule</string>
     <string name="txtEvents">Events</string>
@@ -28,4 +27,18 @@
     <string name="txtRec">Recommended Tournaments</string>
     <string name="txtAddA">Add a Tournament</string>
     <string name="txtRemove">Remove From Saved</string>
+    <string name="txtNoneSaved">It appears you don\'t have any saved tournaments. Head over to Add Tournaments to save some.</string>
+    <string name="txtAbout">About TApp</string>
+    <string name="txtContact">Contact Us</string>
+    <string name="txtAbtOne">Welcome to TApp, the ultimate companion app for any tournament on Smash.gg! Here\'s the rundown on the app, all the features it has.</string>
+    <string name="txtAbtTwo">The first step is to follow a tournament. In order to do this, head over to the  Add Tournaments page, and select a tournament. From there, head over to My  Tournaments to get all the information on the tournament, including events,  attendees, brackets, and schedules.</string>
+    <string name="txtAbtThree">If you are a big fan of certain players, then follow them to get notifications  whenever they play. There are three ways to follow a player. Tap them on the  Attendees screen, the Bracket screen, or by typing their tag into the Followed  Players screen (just make sure to type their name exactly right, including their  sponsors).</string>
+    <string name="txtAbtFour">We hope you enjoy using TApp!</string>
+    <string name="txtCreditsDaniel">Designer/Developer\nDaniel Catlett\n@Catelt42\nYou can follow me on Twitter if you want to see me occasionally retweet some Smash related thing I found funny. Who knows, maybe if enough of you follow me, I might start actually having original thoughts up there. </string>
+    <string name="txtCreditsSimon">Visual Designer\nSimon Saxsma\n@simonsaxsma\nSimon is my best friend, and a highly talented graphical designer. If you like  the look of TApp, and are in need of reasonably priced design for basically  anything (especially tournament branding and stream overlays), definitely reach out to this man. I\'m sure he would also appreciate you following him on Twitter,  but honestly, he doesn\'t really use it all that much, so that\'s kinda your call.</string>
+    <string name="txtCreditsTeper">With special thanks to\nMichael Teper\n@TessituraAQ\nWhen I was first starting on this project, the Smash.GG API was confusing and mystical to me. However, Teper had already learned quite a bit about the API for a seperate project he had done, and was more than happy to offer as much help as I needed, and was willing to try to find solutions to problems I had given up on. He does have a Twitter, but is so inactive on it that in the first draft of this, I simply assumed he didn\'t have one. It was only after I went in and checked that I realized that it did in fact exist, and I was in fact already following him. Anyways, I\'ve given you his handle. Do what you will with it.</string>
+    <string name="txtContactEmail">Found a bug? Have a suggestion? Just wanna talk?\nFeel free to reach out to us!\nthatispossiblyfalco@gmail.com</string>
+    <string name="txtContactDaniel">Follow me on Twitter for development updates!\n@Catelt42</string>
+    <string name="txtContactSimon">Follow Simon on Twitter for awesome art, and to commission him!\n@simonsaxsma</string>
+    <string name="txtContactTeper">Follow Teper on Twitter. Or don\'t. He doesn\'t care.\n@TessituraAQ</string>
 </resources>

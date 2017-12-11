@@ -5,24 +5,37 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class TournamentPage extends AppCompatActivity
 {
     TextView title;
+    TextView date;
     Button scheduleButton;
     Button eventsButton;
     Button attendeesButton;
     Button removeButton;
 
-    Tournament tournament;
+    String tournamentTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,10 +45,18 @@ public class TournamentPage extends AppCompatActivity
         Typeface kelson = Typeface.createFromAsset(getAssets(), "Kelson-Bold.otf");
         title = (TextView)findViewById(R.id.textViewTournament);
         title.setTypeface(kelson);
+        date = (TextView)findViewById(R.id.textDate);
+        date.setTypeface(kelson);
 
-        final String tournamentTitle = this.getIntent().getExtras().getString("title");
+        tournamentTitle = this.getIntent().getExtras().getString("title");
+        final String tournamentSlug = this.getIntent().getExtras().getString("slug");
         title.setText(tournamentTitle);
-        tournament = new Tournament(tournamentTitle);
+
+        //set date
+        final int tournamentPosition = this.getIntent().getExtras().getInt("tournamentPosition");
+        SharedPreferences settings = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String keyDate = constructKey(tournamentPosition + 1, "date");
+        date.setText(settings.getString(keyDate, ""));
 
         scheduleButton = (Button)findViewById(R.id.scheduleButton);
         scheduleButton.setTypeface(kelson);
@@ -52,7 +73,7 @@ public class TournamentPage extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(TournamentPage.this, com.daniel_catlett.tapp.Schedule.class);
-                intent.putExtra("tournamentTitle", tournamentTitle);
+                intent.putExtra("tournamentNum", tournamentPosition + 1);
                 startActivity(intent);
             }
         });
@@ -62,7 +83,7 @@ public class TournamentPage extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(TournamentPage.this, com.daniel_catlett.tapp.Events.class);
-                intent.putExtra("tournamentTitle", tournamentTitle);
+                intent.putExtra("tournamentSlug", tournamentSlug);
                 startActivity(intent);
             }
         });
@@ -72,7 +93,7 @@ public class TournamentPage extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(TournamentPage.this, AttendeesEventsPage.class);
-                intent.putExtra("tournamentTitle", tournamentTitle);
+                intent.putExtra("tournamentSlug", tournamentSlug);
                 startActivity(intent);
             }
         });
@@ -90,7 +111,7 @@ public class TournamentPage extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int which)
                     {
                         updatePreferences();
-                        Toast.makeText(TournamentPage.this, title.getText() + " has been removed from your saved tournaments.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TournamentPage.this, title.getText() + " has been removed from your saved tournaments.", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener()
@@ -115,28 +136,43 @@ public class TournamentPage extends AppCompatActivity
         int numTournaments = settings.getInt("numTournaments", -1);
         editor.putInt("numTournaments", numTournaments - 1);
 
-        //remove tournament name from preferences
         int tournamentNum = this.getIntent().getExtras().getInt("tournamentPosition") + 1;
-        //cycle everything up one spot on the list
-        for(int i = tournamentNum; i < numTournaments; i++)
-        {
-            String key = constructKey(i);
-            String key2 = constructKey(i + 1);
-            editor.putString(key, settings.getString(key2, ""));
-        }
-        //remove final value
-        editor.remove(constructKey(numTournaments));
+
+        //remove tournament name from preferences
+        removeFromSaved(tournamentNum, numTournaments, "", editor, settings);
+        //remove slug
+        removeFromSaved(tournamentNum, numTournaments, "slug", editor, settings);
+        //remove date
+        removeFromSaved(tournamentNum, numTournaments, "date", editor, settings);
+        //remove schedule
+        removeFromSaved(tournamentNum, numTournaments, "schedule", editor, settings);
+        //remove scheduleURL
+        removeFromSaved(tournamentNum, numTournaments, "schedule", editor, settings);
         editor.apply();
 
         //return to myTournaments page, with it hopefully refreshed
         startActivity(new Intent(TournamentPage .this, com.daniel_catlett.tapp.MyTournaments.class));
     }
 
+    private void removeFromSaved(int tournamentNum, int numTournaments, String extension, SharedPreferences.Editor editor, SharedPreferences settings)
+    {
+        //cycle everything up one
+        for(int i = tournamentNum; i < numTournaments; i++)
+        {
+            String key = constructKey(tournamentNum, extension);
+            String key2 = constructKey(tournamentNum + 1, extension);
+            editor.putString(key, settings.getString(key2, ""));
+        }
+        //remove final value
+        editor.remove(constructKey(numTournaments, extension));
+    }
+
     //returns the key used to access the appropriate tournament in preferences
-    private String constructKey(int num)
+    private String constructKey(int num, String extension)
     {
         String key = "tournament";
         key = key.concat(Integer.toString(num));
+        key = key.concat(extension);
         return key;
     }
 }

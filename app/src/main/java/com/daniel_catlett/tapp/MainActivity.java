@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+//import com.testfairy.TestFairy;
+
 public class MainActivity extends AppCompatActivity
 {
     TextView title;
@@ -25,6 +27,9 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //testfairy
+        //TestFairy.begin(this, "e69363d04d8df6136a53278a8f223584a9e36ca6");
 
         //find stuff
         Typeface kelson = Typeface.createFromAsset(getAssets(), "Kelson-Bold.otf");

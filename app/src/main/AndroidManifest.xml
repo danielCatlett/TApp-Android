@@ -32,7 +32,10 @@
         <activity android:name=".PhaseGroups" />
         <activity android:name=".Bracket" />
         <activity android:name=".RecommendedTournaments" />
-        <activity android:name=".InputTournament"></activity>
+        <activity android:name=".InputTournament" />
+        <activity android:name=".AboutPage" />
+        <activity android:name=".CreditsPage" />
+        <activity android:name=".ContactPage"></activity>
     </application>
 
 </manifest>

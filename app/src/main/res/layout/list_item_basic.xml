@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:padding="12dp"
+        android:textColor="@color/simonBlack"
         android:textSize="20sp" />
 </LinearLayout>
